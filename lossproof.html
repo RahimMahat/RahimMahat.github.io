@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lossproof — Rahim Mahat</title>
+<meta name="description" content="The same CDC pipeline built carelessly and correctly, then faulted. With every fault in one run, 69% of the careless lake was wrong. The correct one matched.">
+<meta name="theme-color" content="#0b0b0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0a'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23ff4d1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sweep'))document.documentElement.classList.add('arriving')}catch(e){}</script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="site.js" defer></script>
+<script src="case.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="preview" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__logo" href="index.html" data-magnetic>Rahim Mahat<sup>©26</sup></a>
+  <nav class="nav__links" aria-label="Case studies">
+    <a href="warehouse-gpt.html">WarehouseGPT</a>
+    <a href="leakproof.html">Leakproof</a>
+    <a href="lossproof.html" aria-current="page">Lossproof</a>
+    <a href="nightshift.html">Nightshift</a>
+  </nav>
+  <div class="nav__meta">
+    <a class="nav__contact" href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="case-hero" id="top">
+  <div class="case-hero__meta label"><a href="index.html#work">← All work</a><span>Independent · 03 / 04 · published 2026-10-09</span></div>
+  <p class="case-hero__hook" data-split>After one ordinary week, <em>69% of the careless lake</em> was wrong. The correct one matched.</p>
+  <dl class="facts">
+    <div><dt class="label">stack</dt><dd>PostgreSQL · Debezium · Kafka · Iceberg · Terraform · Step Functions · Lambda · dbt · Athena · Glue · S3 · Python</dd></div>
+    <div><dt class="label">scale</dt><dd>100,000 source transactions and about 320,000 messages through one stream into two lakes, then every source row compared with every lake row by key.</dd></div>
+    <div><dt class="label">source</dt><dd><a href="https://github.com/RahimMahat/lossproof" target="_blank" rel="noopener noreferrer">github.com/RahimMahat/lossproof ↗</a><br>Built and running locally, on emulated AWS.</dd></div>
+  </dl>
+  <h1 class="case-hero__title" aria-label="Lossproof" data-fit data-letters><span aria-hidden="true">Lossproof</span></h1>
+</section>
+
+<section class="case-sec" aria-labelledby="problem-h">
+  <div class="sec-head"><p class="label" id="problem-h">(01) — The problem</p></div>
+  <p class="lede" data-scrub>A change-data-capture pipeline that matches its source on a quiet day can be badly wrong after an ordinary week — a restart, a schema change, a connector someone had to rebuild. Everyone who has run one knows this. What I wanted was the count.</p>
+</section>
+
+<section class="story" aria-labelledby="faults-h"
+  data-values="0|504 · 439 · 0|8,319|53,785"
+  data-captions="wrong rows · careless consumer|wrong rows · careless · three seeds|wrong rows · careless|wrong rows of 77,962 · careless — 69%. The correct one: 0.">
+  <div class="story__pin">
+    <div>
+      <p class="label" id="faults-h">(02) — Fault by fault, each its own run</p>
+      <ol class="story__steps">
+        <li>Redeliver every message from the start. Twice. <small>No damage at all, even to the careless consumer: replaying a contiguous stretch of changes in order ends in the same state.</small></li>
+        <li>Kill the consumer while it works. Three seeds. <small>Crash damage is luck — a pipeline built this way can pass a crash test and still be unsafe.</small></li>
+        <li>One <code>ALTER TABLE</code>. <small>The single most expensive fault: widening a column made the writes fail after the batch's first commit had already deleted the old versions.</small></li>
+        <li>Every fault, in one run.</li>
+      </ol>
+    </div>
+    <div class="story__chart">
+      <p class="readout readout--hot" data-readout>53,785</p>
+      <p class="label story__cap" data-caption>wrong rows of 77,962 · careless — 69%. The correct one: 0.</p>
+      <div class="sbars">
+        <div class="sbar" data-at="0"><div class="sbar__top label"><span>redeliver everything, twice</span><b>0</b></div><div class="sbar__track"><i class="zero" style="--v:0"></i></div></div>
+        <div class="sbar" data-at="1"><div class="sbar__top label"><span>kill under load · three seeds</span><b>504 · 439 · 0</b></div><div class="sbar__track"><i style="--v:.0065"></i><i style="--v:.0056"></i><i class="zero" style="--v:0"></i></div></div>
+        <div class="sbar" data-at="2"><div class="sbar__top label"><span>one ALTER TABLE</span><b>8,319</b></div><div class="sbar__track"><i style="--v:.1067"></i></div></div>
+        <div class="sbar" data-at="3"><div class="sbar__top label"><span>every fault · careless</span><b>53,785</b></div><div class="sbar__track"><i style="--v:.6899"></i></div></div>
+        <div class="sbar sbar--ok" data-at="3"><div class="sbar__top label"><span>every fault · correct</span><b>0</b></div><div class="sbar__track"><i class="zero" style="--v:0"></i></div></div>
+        <p class="axis label"><span>0</span><span>77,962 rows · the lake in the all-fault run</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="arch-h">
+  <div class="sec-head">
+    <p class="label">(03) — The architecture</p>
+    <h2 class="h2" id="arch-h" data-split>One stream, <em>two lakes.</em></h2>
+  </div>
+  <ol class="flow" data-reveal>
+    <li>PostgreSQL<small>a seeded order workload: inserts, updates, deletes, cascades</small></li>
+    <li>Debezium<small>the write-ahead log, as Kafka topics</small></li>
+    <li>Two consumers<small>the same stream into separate Iceberg tables</small></li>
+    <li>Reconciler<small>every source row and lake row, reduced to a string, compared by key</small></li>
+    <li>Step Functions<small>nightly: compact, reconcile, only then build dbt marts</small></li>
+  </ol>
+  <div class="cols">
+    <p class="label">The two consumers</p>
+    <table class="compare" data-reveal>
+      <thead><tr><th scope="col"></th><th scope="col">careless</th><th scope="col">correct</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">offsets</th><td>auto-committed on a timer</td><td>written into the same Iceberg commit as the rows</td></tr>
+        <tr><th scope="row">order</th><td>applied in arrival order</td><td>merged by key and Postgres log position</td></tr>
+        <tr><th scope="row">a batch</th><td>written as two commits</td><td>one commit</td></tr>
+        <tr><th scope="row">schema</th><td>held fixed</td><td>widened when a column appears</td></tr>
+        <tr><th scope="row">junk</th><td>errors logged past</td><td>sent to a dead-letter queue</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="figs">
+    <div class="fig" data-reveal><p class="fig__n"><span data-count="15">15</span><small>→ 1</small></p><p>data files per table after the nightly compaction.</p></div>
+    <div class="fig" data-reveal><p class="fig__n"><span data-count="8,229">8,229</span></p><p>rows reconciled to zero differences before a single mart is built.</p></div>
+    <div class="fig" data-reveal><p class="fig__n"><span data-count="7">7</span><small> / 10</small></p><p>dbt models and tests — and the run fails on <code>LakeDiverged</code> if one row disagrees.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" data-theme="paper" aria-labelledby="broke-h">
+  <div class="sec-head">
+    <p class="label">(04) — What broke</p>
+    <h2 class="h2" id="broke-h" data-split>16,328 wrong <em>out of 16,323.</em></h2>
+  </div>
+  <ol class="broke">
+    <li data-reveal><p><b>The first crash test proved nothing.</b> The careless consumer survived eight kills with zero wrong rows, because every kill had landed while it was idle.</p></li>
+    <li data-reveal><p><b>A failed run looked like a drained one.</b> The emulated Kafka ran out of room for new topics, Debezium's task died, the stream went quiet, and the harness took quiet for finished — scoring both consumers 16,328 wrong of 16,323. Impossible, and the reason the reconciler was built first.</p></li>
+    <li data-reveal><p><b>A re-created connector resumed into a dead slot.</b> Re-using a connector name made it resume from a replication-slot position that no longer existed.</p></li>
+    <li data-reveal><p><b>Compaction crashed</b> when the consumer committed ahead of it.</p></li>
+    <li data-reveal><p><b>dbt registered two marts under one Glue location,</b> so each Athena table returned the other's rows as well.</p></li>
+  </ol>
+  <div class="cols">
+    <p class="label">What fixed it</p>
+    <div class="prose" data-reveal><p>The harness now kills continuously while the workload runs, because a kill only matters under load; it deletes old topics and checks the connector is alive before it trusts a number; and connector and slot names carry the time. Iceberg and the catalogue both refuse a stale commit, so each writer got a plan for losing. Deletes are kept as tombstones, which gives a late change something to compare against. Each mart got its own folder, and a dbt test compares the dimension's current versions against the lake.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="decision-h">
+  <div class="sec-head"><p class="label" id="decision-h">(05) — The interesting decision</p></div>
+  <p class="quote" data-split>Building the reconciler before the consumer it was meant to vindicate.</p>
+  <div class="prose" data-reveal>
+    <p>It is the inversion of the obvious order and it is the whole reason the numbers mean anything: a reconciler written after the good consumer is written by someone who knows what the good consumer does, and it will quietly agree with it. Writing it first meant it had only one consumer to describe and no reason to flatter it.</p>
+    <p>The findings I did not expect run in both directions. Redelivering every message, twice, did no damage. One <code>ALTER TABLE</code> did the most.</p>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="push-h">
+  <div class="sec-head"><p class="label" id="push-h">(06) — Where I'd push back on my own results</p></div>
+  <p class="lede" data-scrub>Crash damage is luck — and every scenario here is a single seed.</p>
+  <div class="prose" data-reveal><p>The careless consumer ended three identical runs on different seeds with 504, 439 and 0 wrong rows. The AWS is an emulator rather than the real thing, and the reconciler needs a drained stream, so it cannot yet be pointed at a live source.</p></div>
+</section>
+
+<section aria-label="Next case study">
+  <a class="next" href="nightshift.html"><span class="label">Next case · 04 / 04</span><span class="next__t">Nightshift →</span></a>
+</section>
+
+</main>
+
+<footer class="foot label">
+  <span>© 2026 Rahim Mahat</span>
+  <a href="index.html#work">← All work</a>
+  <span>static build · no trackers</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+</body>
+</html>

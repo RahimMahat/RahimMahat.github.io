@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rahim Mahat — Senior Data Engineer</title>
+<meta name="description" content="Senior Data Engineer, open to roles worldwide. Production data platforms on AWS, and independent builds that measure what a careless pipeline costs.">
+<meta name="theme-color" content="#0b0b0a">
+<meta property="og:title" content="Rahim Mahat — Senior Data Engineer">
+<meta property="og:description" content="Production data platforms on AWS, and independent builds that measure what a careless pipeline costs.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0a'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23ff4d1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sweep'))document.documentElement.classList.add('arriving')}catch(e){}</script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="site.js" defer></script>
+<script src="home.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="loader" aria-hidden="true">
+  <p class="label">rahim@stdin ~ % reconcile --all</p>
+  <div>
+    <p class="loader__n">0</p>
+    <div class="loader__bar"><i></i></div>
+    <p class="loader__row label"><span>rows checked against source</span><span>differences 0</span></p>
+  </div>
+</div>
+
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="preview" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__logo" href="#top" data-magnetic>Rahim Mahat<sup>©26</sup></a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#evidence">Evidence</a>
+    <a href="#work">Work</a>
+    <a href="#production">Production</a>
+    <a href="#stack">Stack</a>
+    <a href="#career">Career</a>
+  </nav>
+  <div class="nav__meta">
+    <a class="nav__contact" href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <canvas class="hero__canvas" aria-hidden="true"></canvas>
+  <span class="hero__gate label" aria-hidden="true">▾ reconcile</span>
+  <p class="hero__lede" data-split>Dashboards and models are only as honest as their data. I&nbsp;build the pipelines they <em>quietly</em> depend on.</p>
+  <div class="hero__foot">
+    <p class="label">rows reconciled <b data-rows>0</b> · differences <b>0</b></p>
+    <p class="label">Scroll ↓</p>
+  </div>
+  <h1 class="hero__name" aria-label="Rahim Mahat" data-fit data-letters><span aria-hidden="true">Rahim Mahat</span></h1>
+</section>
+
+<section class="numbers" id="evidence" aria-labelledby="evidence-h">
+  <div class="numbers__pin">
+    <div class="sec-head sec-head--row">
+      <p class="label">(01) — Evidence</p>
+      <h2 class="h2" id="evidence-h" data-split>Numbers, <em>with their working.</em></h2>
+    </div>
+    <div class="numbers__track">
+      <a class="stat" href="https://rahim-stdin.pages.dev/projects/ingest" target="_blank" rel="noopener noreferrer" data-cursor="read">
+        <p class="stat__n"><span data-count="50">50</span><small>%</small></p>
+        <p class="stat__t">lower end-to-end processing time than the pipeline it replaced.</p>
+        <p class="label">The landing zone · production</p>
+      </a>
+      <a class="stat" href="https://rahim-stdin.pages.dev/projects/warehouse" target="_blank" rel="noopener noreferrer" data-cursor="read">
+        <p class="stat__n"><span data-count="35">35</span><small>%</small></p>
+        <p class="stat__t">faster query execution on the Redshift serving layer, after tuning.</p>
+        <p class="label">Warehouse &amp; serving · production</p>
+      </a>
+      <a class="stat" href="https://rahim-stdin.pages.dev/projects/sap" target="_blank" rel="noopener noreferrer" data-cursor="read">
+        <p class="stat__n"><span data-count="90">90</span></p>
+        <p class="stat__t">SAP objects onboarded to Athena, through a fleet of 400+ AppFlow flows.</p>
+        <p class="label">SAP onboarding · production</p>
+      </a>
+      <a class="stat" href="warehouse-gpt.html" data-cursor="read">
+        <p class="stat__n"><span data-count="98.0" data-from="63.5">98.0</span><small>%</small></p>
+        <p class="stat__t">execution accuracy for a text-to-SQL agent, up from 63.5% on raw DDL. Context was the only variable.</p>
+        <p class="label">WarehouseGPT · independent</p>
+      </a>
+      <a class="stat" href="leakproof.html" data-cursor="read">
+        <p class="stat__n stat__n--hot"><span data-count="0.513" data-from="0.986">0.513</span></p>
+        <p class="stat__t">PR-AUC of the careless fraud model once it met live features. It scored 0.986 offline.</p>
+        <p class="label">Leakproof · independent</p>
+      </a>
+      <a class="stat" href="lossproof.html" data-cursor="read">
+        <p class="stat__n stat__n--hot"><span data-count="69">69</span><small>%</small></p>
+        <p class="stat__t">of the careless CDC lake was wrong after one faulted run. The correct one: 0 of 77,962 rows.</p>
+        <p class="label">Lossproof · independent</p>
+      </a>
+      <a class="stat" href="nightshift.html" data-cursor="read">
+        <p class="stat__n"><span data-count="15">15</span><small>/16</small></p>
+        <p class="stat__t">incidents fixed by a 101-line runbook, median 9 s. The on-call LLM agent fixed 11.</p>
+        <p class="label">Nightshift · independent</p>
+      </a>
+      <a class="stat" href="leakproof.html" data-cursor="read">
+        <p class="stat__n"><span data-count="5.9" data-from="121">5.9</span><small>ms</small></p>
+        <p class="stat__t">p99 on <code>POST /score</code>, down from 121 ms.</p>
+        <p class="label">Leakproof · independent</p>
+      </a>
+      <div class="stat stat--end">
+        <p class="stat__t">Every figure is restated, with its working, on the page it links to. Including the ones that argue against me.</p>
+        <p class="label">Click any card ↗</p>
+      </div>
+    </div>
+    <div class="numbers__bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<section class="method" aria-labelledby="method-h">
+  <div class="method__pin">
+    <p class="label" id="method-h">(02) — Method</p>
+    <p class="method__text" data-scrub="pin">Build the careless version on purpose. Measure exactly what it costs. Only then build the one that is correct — and ship the number that argues against it too.</p>
+    <p class="method__note">“The failure mode worth designing for is not <i>it broke</i>. It is <i>it half-worked and nobody noticed.</i>”</p>
+  </div>
+</section>
+
+<section class="about" id="about" aria-labelledby="about-h">
+  <div>
+    <p class="label" id="about-h">(03) — whoami</p>
+    <p class="about__lede" data-split>Four years of it, all at Infocepts — <em>and enough production incidents</em> to have opinions about error handling.</p>
+  </div>
+  <div>
+    <p class="about__body" data-reveal>Glue and PySpark on AWS, Terraform underneath. Given the choice I take the unglamorous work: the job that runs at 3am and nobody thinks about, because that is the one that has to be right. Lately I have been pointing the same instincts at applied AI, where the interesting problem is still data movement — just with a more expensive consumer at the end of the pipe.</p>
+    <dl class="about__facts" data-reveal>
+      <div><dt class="label">role</dt><dd>Senior Data Engineer</dd></div>
+      <div><dt class="label">experience</dt><dd>4+ years</dd></div>
+      <div class="wide"><dt class="label">open to</dt><dd>Roles worldwide — relocation or remote</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="work" id="work" aria-labelledby="work-h">
+  <div class="sec-head">
+    <p class="label">(04) — Independent work · 2026</p>
+    <h2 class="h2" id="work-h" data-split>Four projects, <em>one method.</em></h2>
+    <p class="label legend"><i></i> marks what the careless version cost</p>
+  </div>
+
+  <div class="cards">
+    <article class="card" style="--i:0">
+      <div class="card__meta label"><span>01 / 04</span><span>published 2026-09-27</span></div>
+      <div class="card__body">
+        <h3 class="card__title">WarehouseGPT</h3>
+        <p class="card__sum">A text-to-SQL agent, and an ablation suite built to measure why agents like it fail. With full context the smallest model beat both larger ones running on docs alone — on a $0 budget.</p>
+        <ul class="chips"><li>LangGraph</li><li>dbt</li><li>DuckDB</li><li>PySpark</li><li>Delta Lake</li><li>sqlglot</li><li>LanceDB</li><li>FastAPI</li></ul>
+        <div class="card__links">
+          <a class="btn" href="warehouse-gpt.html" data-magnetic>Case study →</a>
+          <a class="btn btn--ghost" href="https://github.com/RahimMahat/warehouse-gpt" target="_blank" rel="noopener noreferrer" data-magnetic>Source ↗</a>
+        </div>
+      </div>
+      <figure class="viz">
+        <div class="bar bar--hot"><span>raw DDL</span><i style="--v:.635"></i><b>63.5%</b></div>
+        <div class="bar"><span>full context</span><i style="--v:.98"></i><b>98.0%</b></div>
+        <figcaption>Execution accuracy · 52 answerable golden questions · 6 must-refuse scored apart</figcaption>
+      </figure>
+    </article>
+
+    <article class="card" style="--i:1">
+      <div class="card__meta label"><span>02 / 04</span><span>published 2026-10-08</span></div>
+      <div class="card__body">
+        <h3 class="card__title">Leakproof</h3>
+        <p class="card__sum">The same fraud model built carelessly and point-in-time correct, then both scored on live stream features. All 14 streamed features matched offline on every row, largest difference 1.8e-12.</p>
+        <ul class="chips"><li>LightGBM</li><li>Redpanda</li><li>Redis</li><li>DuckDB</li><li>FastAPI</li><li>Docker</li></ul>
+        <div class="card__links">
+          <a class="btn" href="leakproof.html" data-magnetic>Case study →</a>
+          <a class="btn btn--ghost" href="https://github.com/RahimMahat/leakproof" target="_blank" rel="noopener noreferrer" data-magnetic>Source ↗</a>
+        </div>
+      </div>
+      <figure class="viz">
+        <svg class="slope" viewBox="0 0 400 250" role="img" aria-label="PR-AUC offline to live: careless 0.986 to 0.513, point-in-time correct 0.695 to 0.665">
+          <line x1="70" y1="20" x2="70" y2="232" class="axis"/><line x1="330" y1="20" x2="330" y2="232" class="axis"/>
+          <path class="slope__hot" pathLength="1" d="M70 25 L330 190"/>
+          <path class="slope__ok" pathLength="1" d="M70 127 L330 137"/>
+          <circle cx="70" cy="25" r="5" class="dot-hot"/><circle cx="330" cy="190" r="5" class="dot-hot"/>
+          <circle cx="70" cy="127" r="5" class="dot-ok"/><circle cx="330" cy="137" r="5" class="dot-ok"/>
+          <text x="58" y="29" text-anchor="end">0.986</text><text x="342" y="194">0.513</text>
+          <text x="58" y="131" text-anchor="end">0.695</text><text x="342" y="141">0.665</text>
+          <text x="70" y="248" text-anchor="middle">offline</text><text x="330" y="248" text-anchor="middle">live</text>
+        </svg>
+        <figcaption>PR-AUC · careless vs point-in-time correct · last 15% of transactions, 88,581 rows</figcaption>
+      </figure>
+    </article>
+
+    <article class="card" style="--i:2">
+      <div class="card__meta label"><span>03 / 04</span><span>published 2026-10-09</span></div>
+      <div class="card__body">
+        <h3 class="card__title">Lossproof</h3>
+        <p class="card__sum">The same CDC pipeline built carelessly and correctly, then faulted. A nightly Step Functions run reconciles every row and fails on <code>LakeDiverged</code> before building a single mart if one disagrees.</p>
+        <ul class="chips"><li>Debezium</li><li>Kafka</li><li>Iceberg</li><li>Step Functions</li><li>dbt</li><li>Athena</li><li>Terraform</li></ul>
+        <div class="card__links">
+          <a class="btn" href="lossproof.html" data-magnetic>Case study →</a>
+          <a class="btn btn--ghost" href="https://github.com/RahimMahat/lossproof" target="_blank" rel="noopener noreferrer" data-magnetic>Source ↗</a>
+        </div>
+      </div>
+      <figure class="viz">
+        <div class="grids">
+          <div><div class="grid" data-grid="69" role="img" aria-label="Careless lake: 69% of rows wrong"></div><p class="label">careless · 53,785 wrong</p></div>
+          <div><div class="grid grid--ok" data-grid="0" role="img" aria-label="Correct lake: 0 rows wrong"></div><p class="label">correct · 0 wrong</p></div>
+        </div>
+        <figcaption>Each cell ≈ 1% of 77,962 rows, compared by key against the source</figcaption>
+      </figure>
+    </article>
+
+    <article class="card" style="--i:3">
+      <div class="card__meta label"><span>04 / 04</span><span>published 2026-10-11</span></div>
+      <div class="card__body">
+        <h3 class="card__title">Nightshift</h3>
+        <p class="card__sum">A receipt-extraction lake with an LLM as an ETL step and an agent on call, both measured. Contracts and a repair loop removed 36–66% of wrong values for 24–35% more tokens.</p>
+        <ul class="chips"><li>AWS CDK</li><li>Lambda</li><li>SQS</li><li>Athena</li><li>MCP</li><li>Docker</li><li>Python</li></ul>
+        <div class="card__links">
+          <a class="btn" href="nightshift.html" data-magnetic>Case study →</a>
+          <a class="btn btn--ghost" href="https://github.com/RahimMahat/nightshift" target="_blank" rel="noopener noreferrer" data-magnetic>Source ↗</a>
+        </div>
+      </div>
+      <figure class="viz">
+        <div class="hits"><p class="label">101-line runbook <b>15/16 · 9 s</b></p><div data-hits="15/16" role="img" aria-label="Runbook fixed 15 of 16 incidents"></div></div>
+        <div class="hits"><p class="label">on-call agent <b>11/16 · 37 s</b></p><div data-hits="11/16" role="img" aria-label="Agent fixed 11 of 16 incidents"></div></div>
+        <figcaption>16 injected incidents · judged against a fault-free run · median time to fix</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<section class="production" id="production" aria-labelledby="production-h" data-theme="paper">
+  <div class="sec-head">
+    <p class="label">(05) — Production · Infocepts · 2022 → now</p>
+    <h2 class="h2" id="production-h" data-split>Ten systems, <em>pager included.</em></h2>
+  </div>
+  <ol class="rows">
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/ingest" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">01</span><span class="row__t">The landing zone</span><span class="row__s">Glue · PySpark · Lambda · SQS</span><span class="row__y">2022</span><span class="row__a">↗</span>
+      <span class="row__note"><b>50%</b> lower end-to-end processing time</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/warehouse" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">02</span><span class="row__t">Warehouse &amp; serving</span><span class="row__s">Redshift · Denodo · QuickSight</span><span class="row__y">2023</span><span class="row__a">↗</span>
+      <span class="row__note"><b>35%</b> faster query execution after tuning</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/retail-pos" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">03</span><span class="row__t">Retail point-of-sale ETL</span><span class="row__s">Glue · PySpark · Redshift · pytest</span><span class="row__y">2023</span><span class="row__a">↗</span>
+      <span class="row__note"><b>29</b> processors across 14 retail partner feeds</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/sap" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">04</span><span class="row__t">SAP object onboarding</span><span class="row__s">AppFlow · Glue · Terraform · CDK</span><span class="row__y">2024</span><span class="row__a">↗</span>
+      <span class="row__note"><b>1h</b> extraction for delta feeds, down from daily</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/platform" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">05</span><span class="row__t">Infrastructure as code</span><span class="row__s">Terraform · CDK · Jenkins</span><span class="row__y">2024</span><span class="row__a">↗</span>
+      <span class="row__note"><b>40%</b> less manual effort per deployment</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/catalog" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">06</span><span class="row__t">The data catalog as code</span><span class="row__s">Terraform · Glue Catalog · Athena</span><span class="row__y">2024</span><span class="row__a">↗</span>
+      <span class="row__note"><b>154</b> tables, 5,000+ columns, reviewed before they exist</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/planning" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">07</span><span class="row__t">Supply-planning ingestion</span><span class="row__s">Glue · pandas · pandera</span><span class="row__y">2024</span><span class="row__a">↗</span>
+      <span class="row__note"><b>10</b> jobs where a bad file fails the run and names itself</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/events" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">08</span><span class="row__t">Analytics event API</span><span class="row__s">API Gateway · Lambda · SQS · CDK</span><span class="row__y">2024</span><span class="row__a">↗</span>
+      <span class="row__note"><b>3</b> phases in under four months, built alone</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/flowctl" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">09</span><span class="row__t">Flow operations utility</span><span class="row__s">Lambda · AppFlow · boto3 · pytest</span><span class="row__y">2025</span><span class="row__a">↗</span>
+      <span class="row__note"><b>400+</b> flows suspended in one invocation with a filter</span></a></li>
+    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/snapshots" target="_blank" rel="noopener noreferrer">
+      <span class="row__i">10</span><span class="row__t">Daily snapshots</span><span class="row__s">Athena · Jinja · Step Functions</span><span class="row__y">2025</span><span class="row__a">↗</span>
+      <span class="row__note"><b>9</b> tables, one current row per key, daily</span></a></li>
+  </ol>
+</section>
+
+<section class="stack" id="stack" aria-labelledby="stack-h" data-theme="paper">
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__inner">
+      <span>PySpark</span><i>✳</i><span>AWS Glue</span><i>✳</i><span>Terraform</span><i>✳</i><span>Redshift</span><i>✳</i><span>Kafka</span><i>✳</i><span>Iceberg</span><i>✳</i><span>dbt</span><i>✳</i><span>Lambda</span><i>✳</i><span>DuckDB</span><i>✳</i><span>LangGraph</span><i>✳</i><span>LightGBM</span><i>✳</i>
+    </div>
+    <div class="marquee__inner marquee__inner--alt">
+      <span>build it careless</span><i>→</i><span>measure the cost</span><i>→</i><span>build it right</span><i>✳</i>
+    </div>
+  </div>
+  <div class="sec-head">
+    <p class="label">(06) — skills --tree</p>
+    <h2 class="h2" id="stack-h" data-split>The stack, <em>by stage.</em></h2>
+  </div>
+  <div class="pipe">
+    <div class="stage" data-reveal><h3 class="label"><b>01</b> ingest</h3><ul><li>AWS Glue<small>PySpark ETL, batch side</small></li><li>Lambda + SQS<small>event-driven, stream side</small></li><li>API Gateway<small>token-authenticated integrations</small></li></ul></div>
+    <div class="stage" data-reveal><h3 class="label"><b>02</b> transform</h3><ul><li>PySpark</li><li>dbt</li><li>SQL<small>Redshift</small></li><li>Python<small>the glue between all of it</small></li></ul></div>
+    <div class="stage stage--store" data-reveal><h3 class="label"><b>03</b> store</h3><ul><li>Redshift</li><li>Amazon S3<small>landing and curated zones</small></li><li>Denodo<small>virtualization over the warehouse</small></li></ul></div>
+    <div class="stage" data-reveal><h3 class="label"><b>04</b> serve · bi</h3><ul><li>QuickSight<small>for stakeholders, not engineers</small></li></ul></div>
+    <div class="stage stage--bed" data-reveal><h3 class="label">underneath it all · orchestration + platform</h3><ul>
+      <li>Jenkins<small>scheduling and CI</small></li>
+      <li>Terraform + CDK<small>modules, reviewed in PRs</small></li>
+      <li>GitHub Actions<small>build and deploy</small></li>
+      <li>Linux + Bash</li>
+      <li>Containers</li>
+      <li>AWS SA Associate<small>in progress</small></li>
+    </ul></div>
+    <div class="stage stage--ml" data-reveal><h3 class="label"><b>05</b> serve · ml &amp; applied ai <span>· from the independent builds</span></h3><ul>
+      <li>LightGBM<small>a fraud model, built careless and point-in-time correct</small></li>
+      <li>Feature pipelines<small>one spec, offline in DuckDB and online in Redis</small></li>
+      <li>Model serving<small>FastAPI, p99 5.9 ms</small></li>
+      <li>Evals<small>ablation ladders, golden sets, scored against labels</small></li>
+      <li>LangGraph<small>a text-to-SQL agent as a state machine</small></li>
+      <li>LLMs in ETL<small>extraction behind contracts and a repair loop</small></li>
+      <li>Agents + MCP<small>tool-calling, behind a policy layer</small></li>
+      <li>LanceDB<small>embeddings for example retrieval, on the CPU</small></li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="career" id="career" aria-labelledby="career-h">
+  <div class="sec-head">
+    <p class="label">(07) — git log --career</p>
+    <h2 class="h2" id="career-h" data-split>Three commits, <em>one branch.</em></h2>
+  </div>
+  <ol class="log">
+    <li class="commit commit--wip" data-reveal>
+      <p class="commit__hash label"><b>working tree</b>uncommitted · updated 2026-10-15</p>
+      <div>
+        <h3 class="commit__role">In progress</h3>
+        <ul class="wip">
+          <li><span class="label">building</span><span>Lossproof, Leakproof and Nightshift — each one still getting harder to fool.</span></li>
+          <li><span class="label">reading</span><span><em>Designing Data-Intensive Applications</em> — the stream processing chapters, again. The Iceberg and DuckDB docs, mostly to argue with myself about table formats.</span></li>
+          <li><span class="label">learning</span><span>AWS Certified Solutions Architect – Associate.</span></li>
+        </ul>
+      </div>
+    </li>
+    <li class="commit commit--head" data-reveal>
+      <p class="commit__hash label"><b>73cdad5</b>Apr 2024 → HEAD</p>
+      <div>
+        <h3 class="commit__role">Senior Data Engineer</h3>
+        <p class="commit__msg"><b>perf(etl):</b> cut processing latency 50% on Glue, PySpark and Jenkins</p>
+        <p class="label">Infocepts · Pune · <span data-since="2024-04">2y 6m</span></p>
+      </div>
+    </li>
+    <li class="commit" data-reveal>
+      <p class="commit__hash label"><b>ad89864</b>Aug 2022 → Apr 2024</p>
+      <div>
+        <h3 class="commit__role">Data Engineer</h3>
+        <p class="commit__msg"><b>feat(aws):</b> event-driven ingestion on Lambda, SQS and Redshift</p>
+        <p class="label">Infocepts · Nagpur · 1y 8m</p>
+      </div>
+    </li>
+    <li class="commit" data-reveal>
+      <p class="commit__hash label"><b>d4fee13</b>Feb 2022 → Aug 2022</p>
+      <div>
+        <h3 class="commit__role">Assistant Analyst</h3>
+        <p class="commit__msg"><b>init:</b> first commit — AWS and dbt, mostly reading code</p>
+        <p class="label">Infocepts · Nagpur · 6m</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <p class="label">(08) — Contact</p>
+  <h2 class="contact__h" id="contact-h" data-split>Got a pipeline that <em>half-works</em> and nobody’s noticed?</h2>
+  <a class="contact__mail" href="mailto:rahimmahat07@gmail.com" data-cursor="write">rahimmahat07@gmail.com</a>
+  <div class="contact__row">
+    <button class="btn" type="button" data-copy="rahimmahat07@gmail.com" data-magnetic>Copy email</button>
+    <a class="btn btn--ghost" href="https://github.com/RahimMahat" target="_blank" rel="noopener noreferrer" data-magnetic>GitHub ↗</a>
+    <a class="btn btn--ghost" href="https://www.linkedin.com/in/rahim-mahat/" target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn ↗</a>
+    <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/resume" target="_blank" rel="noopener noreferrer" data-magnetic>Résumé ↗</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot label">
+  <span>© 2026 Rahim Mahat</span>
+  <a href="https://rahim-stdin.pages.dev/" target="_blank" rel="noopener noreferrer">Prefer a terminal? rahim-stdin ↗</a>
+  <span>static build · no trackers</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+</body>
+</html>

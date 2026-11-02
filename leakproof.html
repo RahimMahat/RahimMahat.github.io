@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leakproof — Rahim Mahat</title>
+<meta name="description" content="The same fraud model built carelessly and point-in-time correct, then scored on live stream features. ROC-AUC 0.999 offline, 0.901 live.">
+<meta name="theme-color" content="#0b0b0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0a'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23ff4d1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sweep'))document.documentElement.classList.add('arriving')}catch(e){}</script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="site.js" defer></script>
+<script src="case.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="preview" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__logo" href="index.html" data-magnetic>Rahim Mahat<sup>©26</sup></a>
+  <nav class="nav__links" aria-label="Case studies">
+    <a href="warehouse-gpt.html">WarehouseGPT</a>
+    <a href="leakproof.html" aria-current="page">Leakproof</a>
+    <a href="lossproof.html">Lossproof</a>
+    <a href="nightshift.html">Nightshift</a>
+  </nav>
+  <div class="nav__meta">
+    <a class="nav__contact" href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="case-hero" id="top">
+  <div class="case-hero__meta label"><a href="index.html#work">← All work</a><span>Independent · 02 / 04 · published 2026-10-08</span></div>
+  <p class="case-hero__hook" data-split>ROC-AUC 0.999 offline. <em>0.901 live.</em> The honest model held 0.947.</p>
+  <dl class="facts">
+    <div><dt class="label">stack</dt><dd>LightGBM · Redpanda · Redis · DuckDB · FastAPI · Streamlit · Docker · Python</dd></div>
+    <div><dt class="label">scale</dt><dd>The last 15% of transactions — 88,581 rows over 30.8 days — replayed through the live path. All 14 streamed features matched offline on every row.</dd></div>
+    <div><dt class="label">source</dt><dd><a href="https://github.com/RahimMahat/leakproof" target="_blank" rel="noopener noreferrer">github.com/RahimMahat/leakproof ↗</a><br>Built and running locally.</dd></div>
+  </dl>
+  <h1 class="case-hero__title" aria-label="Leakproof" data-fit data-letters><span aria-hidden="true">Leakproof</span></h1>
+</section>
+
+<section class="case-sec" aria-labelledby="problem-h">
+  <div class="sec-head"><p class="label" id="problem-h">(01) — The problem</p></div>
+  <p class="lede" data-scrub>A fraud model that scores 0.999 offline can be a 0.90 model in production, and the gap is made by ordinary habits rather than exotic bugs. That much is folk knowledge. What I could not find was the number.</p>
+</section>
+
+<section class="story" aria-labelledby="ladder-h"
+  data-values="0.910|0.970|0.974|0.999|0.901"
+  data-captions="ROC-AUC · careless pipeline · offline|ROC-AUC · careless · offline|ROC-AUC · careless · offline|ROC-AUC · careless · offline|ROC-AUC · careless · live. The honest one held 0.947.">
+  <div class="story__pin">
+    <div>
+      <p class="label" id="ladder-h">(02) — The leakage ladder</p>
+      <ol class="story__steps">
+        <li>A time split. <small>The careless pipeline starts honest about time. The model and its settings stay fixed from here on, so every change in the score belongs to one habit.</small></li>
+        <li>Split at random instead.</li>
+        <li>Add card aggregates computed over every row.</li>
+        <li>Add a per-card fraud rate that has read every label. <small>Including the one being predicted.</small></li>
+        <li>Now score it on features the live stream actually produced.</li>
+      </ol>
+    </div>
+    <div class="story__chart">
+      <p class="readout readout--hot" data-readout>0.901</p>
+      <p class="label story__cap" data-caption>ROC-AUC · careless · live. The honest one held 0.947.</p>
+      <svg class="ladder" viewBox="0 0 600 420" role="img" aria-label="ROC-AUC offline as each habit is added: 0.910, 0.970, 0.974, 0.999. Live: 0.901. The point-in-time pipeline scored 0.954 offline and 0.947 live.">
+        <line class="gl" x1="40" x2="590" y1="303" y2="303"/><text x="0" y="307">0.90</text>
+        <line class="gl" x1="40" x2="590" y1="162" y2="162"/><text x="0" y="166">0.95</text>
+        <line class="gl" x1="40" x2="590" y1="20" y2="20"/><text x="0" y="24">1.00</text>
+        <line class="gl" x1="480" x2="480" y1="8" y2="330"/>
+        <text x="470" y="348" text-anchor="end">offline ←</text><text x="490" y="348">→ live</text>
+        <path class="hot" pathLength="1" data-at="1" d="M60 275 L180 105"/>
+        <path class="hot" pathLength="1" data-at="2" d="M180 105 L300 94"/>
+        <path class="hot" pathLength="1" data-at="3" d="M300 94 L420 23"/>
+        <path class="hot" pathLength="1" data-at="4" d="M420 23 L540 300"/>
+        <path class="ok" pathLength="1" data-at="4" d="M420 150 L540 170"/>
+        <circle class="hot" r="6" cx="60" cy="275" data-at="0"/>
+        <circle class="hot" r="6" cx="180" cy="105" data-at="1"/>
+        <circle class="hot" r="6" cx="300" cy="94" data-at="2"/>
+        <circle class="hot" r="6" cx="420" cy="23" data-at="3"/>
+        <circle class="hot" r="6" cx="540" cy="300" data-at="4"/>
+        <circle class="ok" r="6" cx="420" cy="150" data-at="4"/>
+        <circle class="ok" r="6" cx="540" cy="170" data-at="4"/>
+        <text class="v" x="60" y="257" text-anchor="middle" data-at="0">0.910</text>
+        <text class="v" x="168" y="96" text-anchor="end" data-at="1">0.970</text>
+        <text class="v" x="300" y="76" text-anchor="middle" data-at="2">0.974</text>
+        <text class="v" x="408" y="18" text-anchor="end" data-at="3">0.999</text>
+        <text class="v" x="554" y="305" data-at="4">0.901</text>
+        <text class="v" x="408" y="155" text-anchor="end" data-at="4">0.954</text>
+        <text class="v" x="554" y="175" data-at="4">0.947</text>
+        <text x="60" y="400" text-anchor="middle">time</text>
+        <text x="180" y="400" text-anchor="middle">random</text>
+        <text x="300" y="400" text-anchor="middle">+aggs</text>
+        <text x="420" y="400" text-anchor="middle">+rate</text>
+        <text x="540" y="400" text-anchor="middle">stream</text>
+      </svg>
+      <p class="label legend"><i></i>careless <i class="ok"></i>point-in-time correct</p>
+    </div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="cost-h">
+  <div class="sec-head">
+    <p class="label">(03) — What the leak costs</p>
+    <h2 class="h2" id="cost-h" data-split>In money, <em>on a $5 review cost.</em></h2>
+  </div>
+  <div class="figs">
+    <div class="fig" data-reveal><p class="fig__n"><small>$</small><span data-count="264">264</span></p><p>what the careless model promised, per thousand transactions.</p></div>
+    <div class="fig" data-reveal><p class="fig__n fig__n--hot"><small>$</small><span data-count="4,304">4,304</span></p><p>what it cost — its threshold was tuned on scores it could not reproduce.</p></div>
+    <div class="fig" data-reveal><p class="fig__n"><small>$</small><span data-count="147">147</span><small>k</small></p><p>the month's bill with the threshold chosen by cost rather than accuracy, against $300k. Within 1.3% of the best threshold in hindsight.</p></div>
+  </div>
+  <div class="figs">
+    <div class="fig" data-reveal><p class="fig__n"><span data-count="2.8" data-from="121">2.8</span><small>ms</small></p><p>p50 on <code>POST /score</code>, down from 121 ms. Redis was 1.8 ms and the model under 1 ms; the rest was a one-row pandas DataFrame built per request.</p></div>
+    <div class="fig" data-reveal><p class="fig__n"><span data-count="5.9">5.9</span><small>ms</small></p><p>p99, with p95 at 4.3 ms — identical scores to the slow version.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="arch-h">
+  <div class="sec-head">
+    <p class="label">(04) — The architecture</p>
+    <h2 class="h2" id="arch-h" data-split>One spec, <em>two paths.</em></h2>
+  </div>
+  <ol class="flow" data-reveal>
+    <li>IEEE-CIS<small>the same LightGBM model, built twice</small></li>
+    <li>Feature spec<small>defined once: DuckDB windows offline, Redis sorted sets online</small></li>
+    <li>Redpanda<small>transactions and label arrivals on one ordered partition</small></li>
+    <li>Redis<small>per-card state</small></li>
+    <li>FastAPI<small>reads the state, scores, records the transaction</small></li>
+  </ol>
+  <div class="cols">
+    <div class="prose" data-reveal><p>The careless pipeline adds one bad habit at a time, with the model and its settings held fixed, so the inflation can be attributed rather than just observed. The honest pipeline defines every feature once: a transaction's features use only that card's earlier transactions, and only labels that had arrived by then.</p></div>
+    <div class="prose" data-reveal><p>Both are scored on a holdout month using features the live path actually produced. The offline and online halves read one spec, which is the only reason the comparison means anything.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" data-theme="paper" aria-labelledby="broke-h">
+  <div class="sec-head">
+    <p class="label">(05) — What broke</p>
+    <h2 class="h2" id="broke-h" data-split>Label timing <em>is its own leak.</em></h2>
+  </div>
+  <ol class="broke">
+    <li data-reveal><p><b>The labels were from the future.</b> Point-in-time features with labels assumed known a second after each transaction scored 0.981 on validation; with a realistic confirmation delay, 0.954. Nothing about the feature timestamps was wrong.</p></li>
+    <li data-reveal><p><b>Parity needed an ordering rule, not matching formulas.</b> A label arriving in the same second as a transaction has to be applied first in both paths, and a transaction must not see itself.</p></li>
+    <li data-reveal><p><b>The first scoring service took 121 ms a request,</b> of which Redis was 1.8 ms and the model under 1 ms.</p></li>
+  </ol>
+  <div class="cols">
+    <p class="label">What fixed it</p>
+    <div class="prose" data-reveal><p>Every feature is defined once in a spec both paths read, and transactions and label arrivals share one ordered single-partition topic, so their relative order is a property of the data rather than of the consumer. Streaming the whole holdout period through the real containers, all 14 features matched on all 88,581 rows. A test moves future rows and fails if any past feature changes.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="decision-h">
+  <div class="sec-head"><p class="label" id="decision-h">(06) — The interesting decision</p></div>
+  <p class="quote" data-split>Writing the careless pipeline deliberately, and incrementally, instead of only building the good one.</p>
+  <div class="prose" data-reveal>
+    <p>It is the expensive half of the project and it produces no deployable artefact, but without it the headline is one model's score against another's, which proves nothing about leakage in particular. The incremental version is what turns “the score was inflated” into a ledger of which habit bought how much.</p>
+    <p>The result I did not expect: the honest model is also the better model live — 0.947 against 0.901 ROC-AUC, 0.665 against 0.513 PR-AUC. Leakage does not merely flatter the score; it produces a model that leans on features it will never be given.</p>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="push-h">
+  <div class="sec-head"><p class="label" id="push-h">(07) — Where I'd push back on my own results</p></div>
+  <p class="lede" data-scrub>The direction of the effect I will defend; the second decimal place I will not.</p>
+  <div class="prose" data-reveal><p>This is one dataset, one seed and one training date, with no intervals reported, and the label delay is simulated and independent of everything else — real chargebacks that confirm quickly probably differ from the ones that confirm late. The latency numbers are one client on a laptop against a single-threaded consumer on one partition, which says nothing about concurrent load.</p></div>
+</section>
+
+<section aria-label="Next case study">
+  <a class="next" href="lossproof.html"><span class="label">Next case · 03 / 04</span><span class="next__t">Lossproof →</span></a>
+</section>
+
+</main>
+
+<footer class="foot label">
+  <span>© 2026 Rahim Mahat</span>
+  <a href="index.html#work">← All work</a>
+  <span>static build · no trackers</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+</body>
+</html>

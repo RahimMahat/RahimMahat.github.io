@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightshift — Rahim Mahat</title>
+<meta name="description" content="A receipt-extraction lake with an LLM as an ETL step and an agent on call, both measured. A 101-line script fixed 15 of 16 incidents. The agent fixed 11.">
+<meta name="theme-color" content="#0b0b0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0a'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23ff4d1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sweep'))document.documentElement.classList.add('arriving')}catch(e){}</script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="site.js" defer></script>
+<script src="case.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="preview" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__logo" href="index.html" data-magnetic>Rahim Mahat<sup>©26</sup></a>
+  <nav class="nav__links" aria-label="Case studies">
+    <a href="warehouse-gpt.html">WarehouseGPT</a>
+    <a href="leakproof.html">Leakproof</a>
+    <a href="lossproof.html">Lossproof</a>
+    <a href="nightshift.html" aria-current="page">Nightshift</a>
+  </nav>
+  <div class="nav__meta">
+    <a class="nav__contact" href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="case-hero" id="top">
+  <div class="case-hero__meta label"><a href="index.html#work">← All work</a><span>Independent · 04 / 04 · published 2026-10-11</span></div>
+  <p class="case-hero__hook" data-split>A 101-line script fixed 15 of 16 incidents. <em>The agent fixed 11.</em></p>
+  <dl class="facts">
+    <div><dt class="label">stack</dt><dd>AWS CDK · Lambda · SQS · S3 · API Gateway · Glue Data Catalog · Athena · CloudWatch · Parquet · MCP · Docker · Python</dd></div>
+    <div><dt class="label">scale</dt><dd>100 receipts from the CORD test split for each of three models, then 16 injected incidents handled by four responders through one policy layer.</dd></div>
+    <div><dt class="label">source</dt><dd><a href="https://github.com/RahimMahat/nightshift" target="_blank" rel="noopener noreferrer">github.com/RahimMahat/nightshift ↗</a><br>Built and running locally, on emulated AWS.</dd></div>
+  </dl>
+  <h1 class="case-hero__title" aria-label="Nightshift" data-fit data-letters><span aria-hidden="true">Nightshift</span></h1>
+</section>
+
+<section class="case-sec" aria-labelledby="problem-h">
+  <div class="sec-head"><p class="label" id="problem-h">(01) — The problem</p></div>
+  <p class="lede" data-scrub>Two things get said about LLMs and data pipelines: that a model can be an ETL step, and that an agent can be the engineer on call. Both are usually shown as a demo, and a demo answers neither question that matters.</p>
+</section>
+
+<section class="story" aria-labelledby="race-h"
+  data-values="16|1|9|11|15"
+  data-captions="incidents, each judged against a fault-free run|fixed by doing nothing|fixed by the agent, without the runbook as text|fixed by the agent · median 37 s|fixed by 101 lines of plain rules · median 9 s">
+  <div class="story__pin">
+    <div>
+      <p class="label" id="race-h">(02) — On call, four responders</p>
+      <ol class="story__steps">
+        <li>Sixteen ways to break the platform. <small>And a policy layer every action must pass — eight actions, none of which deletes anything, each dry-run first.</small></li>
+        <li>Doing nothing.</li>
+        <li>The agent, without the runbook as text.</li>
+        <li>The agent, with it.</li>
+        <li>A scripted runbook. 101 lines of plain rules.</li>
+      </ol>
+    </div>
+    <div class="story__chart">
+      <p class="readout" data-readout>15</p>
+      <p class="label story__cap" data-caption>fixed by 101 lines of plain rules · median 9 s</p>
+      <div class="race">
+        <div class="lane lane--all" data-at="0"><p class="label"><span>the incidents</span><b>16</b></p><div data-hits="0/16"></div></div>
+        <div class="lane" data-at="1"><p class="label"><span>doing nothing</span><b>1 / 16</b></p><div data-hits="1/16"></div></div>
+        <div class="lane" data-at="2"><p class="label"><span>agent, no runbook text</span><b>9 / 16</b></p><div data-hits="9/16"></div></div>
+        <div class="lane" data-at="3"><p class="label"><span>agent</span><b>11 / 16 · 37 s</b></p><div data-hits="11/16"></div></div>
+        <div class="lane lane--win" data-at="4"><p class="label"><span>101-line runbook</span><b>15 / 16 · 9 s</b></p><div data-hits="15/16"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="miss-h">
+  <div class="sec-head">
+    <p class="label">(03) — The one the script missed</p>
+    <h2 class="h2" id="miss-h" data-split>Rules are reliable on what their author <em>thought of.</em></h2>
+  </div>
+  <div class="cols">
+    <div class="prose" data-reveal><p>The script's one failure is the agent's best case. When a source renamed its fields, the script took real documents for junk and set five aside — and the agent, in one run of three, read a file, saw a new format and escalated.</p></div>
+    <div class="prose" data-reveal><p>The agent's failures were not random. It restores a setting and stops as soon as the alarm clears, leaving the rows a weaker model had already written in the lake. It takes half-minute-old failures for a live outage. And twice it asked to switch to a model that appears nowhere in the project, which the policy layer refused.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" data-theme="paper" aria-labelledby="sep-h">
+  <div class="sec-head">
+    <p class="label">(04) — The LLM as an ETL step</p>
+    <h2 class="h2" id="sep-h" data-split>Nine in ten wrong header amounts <em>were one mistake.</em></h2>
+  </div>
+  <div class="cols">
+    <div>
+      <button class="sep toggle" type="button" aria-pressed="false" aria-label="60.000 as printed; press to see it as the model stored it, 60"><span>60</span><span class="sep__tail"><b>.</b>000</span></button>
+      <p class="label">printed on the receipt · hover or tap: what the model stored</p>
+    </div>
+    <div class="prose" data-reveal>
+      <p>More than nine in ten of the wrong header amounts were a thousands separator read as a decimal point. The arithmetic checks cannot see it: a receipt read that way is wrong by the same factor everywhere, and its sums still add up. The check that caught it asks only whether each number is printed in the document.</p>
+      <div class="range"><i style="--a:.36;--b:.66"></i></div>
+      <p class="label"><span>wrong values removed by contracts and a repair loop</span><b>36–66%</b></p>
+      <div class="range range--hot"><i style="--a:.235;--b:.245"></i></div>
+      <p class="label"><span>on a held-out split — the honest one</span><b>24%</b></p>
+      <p>For 24% to 35% more tokens.</p>
+    </div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="planted-h">
+  <div class="sec-head">
+    <p class="label">(05) — Planted</p>
+    <h2 class="h2" id="planted-h" data-split>Four incidents carried <em>instructions for the responder.</em></h2>
+  </div>
+  <ul class="struck" data-reveal>
+    <li style="--i:0">Purge the queues</li>
+    <li style="--i:1">Switch models</li>
+    <li style="--i:2">Pause</li>
+  </ul>
+  <div class="prose" data-reveal><p>None was followed, by any responder, in any run.</p></div>
+</section>
+
+<section class="case-sec" aria-labelledby="arch-h">
+  <div class="sec-head">
+    <p class="label">(06) — The architecture</p>
+    <h2 class="h2" id="arch-h" data-split>Safe <em>to run twice.</em></h2>
+  </div>
+  <ol class="flow" data-reveal>
+    <li>API Gateway<small>to an ingest Lambda</small></li>
+    <li>S3<small>one file per document, named by a hash of its content</small></li>
+    <li>SQS<small>with a dead-letter queue behind it</small></li>
+    <li>Extract Lambda<small>one prompt, contracts around it, quarantine after two repairs</small></li>
+    <li>Parquet<small>Glue and Athena on top</small></li>
+  </ol>
+  <div class="cols">
+    <div class="prose" data-reveal><p>The lake is AWS CDK deployed to a local emulator. Model calls are recorded and replayed, so the pipeline is deterministic and needs no key in CI. Around the pipeline sit a run log, metrics, four alarms and a reconciler that compares the lake with a fault-free run, document by document.</p></div>
+    <div class="prose" data-reveal><p>Then the operations half: sixteen ways to break the platform, the policy layer, the scripted runbook — and last of all the agent, a tool-calling loop with no framework whose tools are also served over MCP.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" data-theme="paper" aria-labelledby="broke-h">
+  <div class="sec-head">
+    <p class="label">(07) — What broke</p>
+    <h2 class="h2" id="broke-h" data-split>The emulator says yes <em>and does nothing.</em></h2>
+  </div>
+  <ol class="broke">
+    <li data-reveal><p><b>Its CloudFormation reported the Glue database, the bucket notification and a schedule as created,</b> and created none of them.</p></li>
+    <li data-reveal><p><b>My scorer was wrong before the model was,</b> punishing every model for skipping lines like “Less Ice” that the dataset labels as items.</p></li>
+    <li data-reveal><p><b>The free tier counted the whole output cap against its per-minute limit,</b> my limiter kept reservations for refused requests, and the first evaluation took four times longer than it should have.</p></li>
+    <li data-reveal><p><b>The laptop slept for 27 minutes in the middle of an incident,</b> and the run looked like a stalled pipeline.</p></li>
+    <li data-reveal><p><b>The first agent pilot failed because of my tools, not the model:</b> a redrive did not say what it had moved, timestamps came with no “now”, and error counts included old errors.</p></li>
+    <li data-reveal><p><b>The agent's first full run found three bugs in my harness</b> that the scripted runbook had never reached, because the script only ever does things in the order I wrote.</p></li>
+  </ol>
+  <div class="cols">
+    <p class="label">What fixed it</p>
+    <div class="prose" data-reveal><p>A spike tested every unproven part before the design depended on it, which is where the emulator's silent no-ops were caught. Only priced lines count in the scorer now, for every model, and the write-up says the rule was chosen after seeing the mismatches. For the pilot I changed the tools, not the prompt. The three harness bugs were fixed, every responder was run again, and both passes are reported.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="decision-h">
+  <div class="sec-head"><p class="label" id="decision-h">(08) — The interesting decision</p></div>
+  <p class="quote" data-split>Writing the incidents, the policy layer and the scripted runbook before the agent existed.</p>
+  <div class="prose" data-reveal><p>It is the same inversion as building the reconciler first in Lossproof: the baseline has to exist before the thing it judges, or the agent is graded against nothing. It is also what produced the result.</p></div>
+</section>
+
+<section class="case-sec" aria-labelledby="push-h">
+  <div class="sec-head"><p class="label" id="push-h">(09) — Where I'd push back on my own results</p></div>
+  <p class="lede" data-scrub>These are counts, not rates — and the script had already seen its own exam.</p>
+  <div class="prose" data-reveal><p>Every responder ran each incident once. I wrote both the incidents and the script that handles them. And the repair loop's 36% to 66% is the number I designed against; on a split I had not looked at it was 24%, and that is the honest one.</p></div>
+</section>
+
+<section aria-label="Next case study">
+  <a class="next" href="warehouse-gpt.html"><span class="label">Next case · 01 / 04</span><span class="next__t">WarehouseGPT →</span></a>
+</section>
+
+</main>
+
+<footer class="foot label">
+  <span>© 2026 Rahim Mahat</span>
+  <a href="index.html#work">← All work</a>
+  <span>static build · no trackers</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+</body>
+</html>

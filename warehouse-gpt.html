@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WarehouseGPT — Rahim Mahat</title>
+<meta name="description" content="A text-to-SQL agent, and an ablation suite built to measure why agents like it fail. Context took the smallest model from 63.5% to 98.0%.">
+<meta name="theme-color" content="#0b0b0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0a'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23ff4d1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sweep'))document.documentElement.classList.add('arriving')}catch(e){}</script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="site.js" defer></script>
+<script src="case.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="preview" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__logo" href="index.html" data-magnetic>Rahim Mahat<sup>©26</sup></a>
+  <nav class="nav__links" aria-label="Case studies">
+    <a href="warehouse-gpt.html" aria-current="page">WarehouseGPT</a>
+    <a href="leakproof.html">Leakproof</a>
+    <a href="lossproof.html">Lossproof</a>
+    <a href="nightshift.html">Nightshift</a>
+  </nav>
+  <div class="nav__meta">
+    <a class="nav__contact" href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="case-hero" id="top">
+  <div class="case-hero__meta label"><a href="index.html#work">← All work</a><span>Independent · 01 / 04 · published 2026-09-27</span></div>
+  <p class="case-hero__hook" data-split>Context took the smallest model from 63.5% <em>to 98.0%.</em></p>
+  <dl class="facts">
+    <div><dt class="label">stack</dt><dd>LangGraph · dbt · DuckDB · PySpark · Delta Lake · LiteLLM · sqlglot · LanceDB · FastAPI · OpenTelemetry · Python</dd></div>
+    <div><dt class="label">scale</dt><dd>About 1.5M rows — 99,441 orders, 96,096 customers, 3,095 sellers — into a seven-table star schema behind 17 governed metrics, 31 Spark data-quality checks and 49 dbt tests. On a $0 budget.</dd></div>
+    <div><dt class="label">source</dt><dd><a href="https://github.com/RahimMahat/warehouse-gpt" target="_blank" rel="noopener noreferrer">github.com/RahimMahat/warehouse-gpt ↗</a><br>Built and running locally.</dd></div>
+  </dl>
+  <h1 class="case-hero__title" aria-label="WarehouseGPT" data-fit data-letters><span aria-hidden="true">WarehouseGPT</span></h1>
+</section>
+
+<section class="case-sec" aria-labelledby="problem-h">
+  <div class="sec-head"><p class="label" id="problem-h">(01) — The problem</p></div>
+  <p class="lede" data-scrub>A “chat with your database” demo pastes the CREATE TABLE statements into a prompt and lets the model write SQL. Against a real warehouse that produces answers which run, and are wrong.</p>
+  <ul class="traps">
+    <li><button class="trap toggle" type="button" aria-pressed="false">
+      <span><span class="label">revenue</span><code>SUM(order_value)</code><span class="label">runs fine ↻</span></span>
+      <span class="trap__a"><span class="label">what the data means</span>Quietly includes freight and canceled orders. The business means item prices on orders that weren't canceled.</span>
+    </button></li>
+    <li><button class="trap toggle" type="button" aria-pressed="false">
+      <span><span class="label">customers</span><code>COUNT(DISTINCT customer_id)</code><span class="label">runs fine ↻</span></span>
+      <span class="trap__a"><span class="label">what the data means</span>Overcounts people by several thousand — in this dataset the id is issued per order.</span>
+    </button></li>
+    <li><button class="trap toggle" type="button" aria-pressed="false">
+      <span><span class="label">cancellations</span><code>status = 'cancelled'</code><span class="label">runs fine ↻</span></span>
+      <span class="trap__a"><span class="label">what the data means</span>The data says <code>'canceled'</code>.</span>
+    </button></li>
+    <li><button class="trap toggle" type="button" aria-pressed="false">
+      <span><span class="label">a state</span><code>state = 'São Paulo'</code><span class="label">runs fine ↻</span></span>
+      <span class="trap__a"><span class="label">what the data means</span>The data says <code>'SP'</code>.</span>
+    </button></li>
+    <li><button class="trap toggle" type="button" aria-pressed="false">
+      <span><span class="label">year over year</span><code>GROUP BY year</code><span class="label">runs fine ↻</span></span>
+      <span class="trap__a"><span class="label">what the data means</span>2016 and late 2018 are both partial years; the comparison treats them as whole ones.</span>
+    </button></li>
+  </ul>
+  <div class="prose" data-reveal><p>Every one of those is something a new analyst is told in their first week, and something dbt docs, a semantic layer and data-quality checks already exist to write down. My hypothesis was that these agents mostly fail for want of that context rather than for want of a bigger model — and that it was worth measuring rather than asserting.</p></div>
+</section>
+
+<section class="story" aria-labelledby="ladder-h"
+  data-values="63.5%|+10–19 pts|98.0%|98.0%"
+  data-captions="execution accuracy · smallest model · raw DDL|what documentation alone was worth, depending on the model|smallest model · full context · 50 of 51|with everything on, the smallest model beat both larger ones running on docs alone">
+  <div class="story__pin">
+    <div>
+      <p class="label" id="ladder-h">(02) — The ablation ladder</p>
+      <ol class="story__steps">
+        <li>Raw DDL. <small>The CREATE TABLE statements, and nothing else.</small></li>
+        <li>Add documentation.</li>
+        <li>Add the rest. <small>17 governed metrics, a profiler that records exact values, time coverage and failing checks, 22 verified examples, and repair on failure.</small></li>
+        <li>The system prompt is byte-identical at every rung. <small>So any difference in the score is the context, and nothing else.</small></li>
+      </ol>
+    </div>
+    <div class="story__chart">
+      <p class="readout" data-readout>98.0%</p>
+      <p class="label story__cap" data-caption>smallest model · full context · 50 of 51</p>
+      <div class="layers">
+        <div class="stackv">
+          <span data-at="2">repair on failure</span>
+          <span data-at="2">22 verified examples</span>
+          <span data-at="2">profiler · values, coverage, caveats</span>
+          <span data-at="2">17 governed metrics</span>
+          <span data-at="1">documentation</span>
+          <span data-at="0">raw DDL</span>
+        </div>
+        <div class="meter" role="img" aria-label="Execution accuracy: 63.5% on raw DDL, 98.0% with full context">
+          <i class="meter__full" data-at="2" style="--v:.98"></i>
+          <i class="meter__base" data-at="0" style="--v:.635"></i>
+          <span class="meter__tag label" data-at="0" style="bottom:63.5%">63.5</span>
+          <span class="meter__tag label" data-at="2" style="bottom:98%">98.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="arch-h">
+  <div class="sec-head">
+    <p class="label">(03) — The architecture</p>
+    <h2 class="h2" id="arch-h" data-split>Delta is <em>the contract.</em></h2>
+  </div>
+  <ol class="flow" data-reveal>
+    <li>Spark<small>bronze and silver as Delta, 31 data-quality checks</small></li>
+    <li>dbt on DuckDB<small>reads Delta in place through <code>delta_scan</code>, builds the gold star schema</small></li>
+    <li>Context<small>metrics in MetricFlow, a profiler, 22 examples indexed on the CPU</small></li>
+    <li>The agent<small>an explicit LangGraph state machine</small></li>
+  </ol>
+  <div class="cols">
+    <p class="label">The agent, one switch per step</p>
+    <ol class="flow" data-reveal>
+      <li>Context<small>assemble</small></li>
+      <li>Generate<small>SQL</small></li>
+      <li>Guard<small>sqlglot</small></li>
+      <li>Execute<small>read-only DuckDB sandbox</small></li>
+      <li>Repair<small>on failure</small></li>
+      <li>Answer</li>
+    </ol>
+  </div>
+</section>
+
+<section class="case-sec" data-theme="paper" aria-labelledby="broke-h">
+  <div class="sec-head">
+    <p class="label">(04) — What broke</p>
+    <h2 class="h2" id="broke-h" data-split>The evaluation lied <em>in both directions.</em></h2>
+  </div>
+  <ol class="broke">
+    <li data-reveal><p><b>A percentage printed as <code>1.60</code> arrived as the float <code>1.6</code></b> and tripped my own rounding rule.</p></li>
+    <li data-reveal><p><b>One extra <code>NULL</code> group row</b> sank an otherwise correct answer.</p></li>
+    <li data-reveal><p><b>Two golden questions had drifted into near-copies of retrievable examples,</b> so on the top rung the agent was being marked on its own study notes.</p></li>
+    <li data-reveal><p><b>One rung had only been partly rebuilt,</b> which made it look identical to the rung below — because the questions still missing were exactly the ones where self-correction would have fired.</p></li>
+  </ol>
+  <div class="cols">
+    <p class="label">What fixed it</p>
+    <div class="prose" data-reveal><p>Every one of those is now a test rather than a thing I remember. The comparator's rules each have unit tests, including the negative cases; a disjointness test fails if a golden question drifts too close to a retrievable example; and the report drops any rung with incomplete coverage instead of estimating it, because a plausible number is worse than a missing one.</p></div>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="decision-h">
+  <div class="sec-head"><p class="label" id="decision-h">(05) — The interesting decision</p></div>
+  <p class="quote" data-split>A state machine rather than a free-form tool loop — which cost me the thing everyone wants from an agent.</p>
+  <div class="prose" data-reveal>
+    <p>A ReAct-style loop is more flexible and would handle questions that need genuine exploration; mine cannot. What it buys is that every capability is a switch the evaluation can turn off — you cannot ablate a component the model may or may not have decided to use on any given run.</p>
+    <p>The same instinct produced the refusal I am most sure about: the answer cache matches exact normalized questions only, because “revenue in 2017” and “revenue in 2018” embed almost identically, and a semantic cache would serve one for the other — confidently, silently wrong about the year.</p>
+  </div>
+</section>
+
+<section class="case-sec" aria-labelledby="push-h">
+  <div class="sec-head"><p class="label" id="push-h">(06) — Where I'd push back on my own results</p></div>
+  <p class="lede" data-scrub>63.5% to 98.0% is a real effect and I will defend it. Two models landing on 82.7% apiece is not a finding.</p>
+  <svg class="ci" viewBox="0 0 600 270" role="img" aria-label="Scores with ±10 to 14 point confidence intervals: 63.5, two at 82.7, and 98.0. The two 82.7 intervals overlap almost entirely." data-reveal>
+    <line class="gl" x1="40" x2="40" y1="20" y2="240"/><line class="gl" x1="300" x2="300" y1="20" y2="240"/><line class="gl" x1="560" x2="560" y1="20" y2="240"/>
+    <text x="40" y="262" text-anchor="middle">40%</text><text x="300" y="262" text-anchor="middle">70%</text><text x="560" y="262" text-anchor="middle">100%</text>
+    <line class="w2" x1="122" x2="365" y1="50" y2="50"/><line class="w1" x1="157" x2="330" y1="50" y2="50"/><circle class="hot" cx="244" cy="50" r="7"/><text x="244" y="34" text-anchor="middle">raw DDL · 63.5</text>
+    <line class="w2" x1="289" x2="531" y1="110" y2="110"/><line class="w1" x1="323" x2="497" y1="110" y2="110"/><circle cx="410" cy="110" r="7"/><text x="410" y="94" text-anchor="middle">mid-table model · 82.7</text>
+    <line class="w2" x1="289" x2="531" y1="170" y2="170"/><line class="w1" x1="323" x2="497" y1="170" y2="170"/><circle cx="410" cy="170" r="7"/><text x="410" y="154" text-anchor="middle">mid-table model · 82.7</text>
+    <line class="w2" x1="421" x2="560" y1="225" y2="225"/><line class="w1" x1="456" x2="560" y1="225" y2="225"/><circle cx="543" cy="225" r="7"/><text x="520" y="209" text-anchor="end">full context · 98.0</text>
+  </svg>
+  <div class="prose" data-reveal><p>On 52 answerable questions the confidence intervals are ±10–14 points, and a number that precise invites more weight than it can carry. Solid lines above are ±10, dashed ±14.</p></div>
+</section>
+
+<section aria-label="Next case study">
+  <a class="next" href="leakproof.html"><span class="label">Next case · 02 / 04</span><span class="next__t">Leakproof →</span></a>
+</section>
+
+</main>
+
+<footer class="foot label">
+  <span>© 2026 Rahim Mahat</span>
+  <a href="index.html#work">← All work</a>
+  <span>static build · no trackers</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+</body>
+</html>
