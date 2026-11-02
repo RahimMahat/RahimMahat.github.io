@@ -314,28 +314,50 @@ em, .method__note i {
 .card.in .hits span.hit { background: var(--fg); }
 .card.in .hits span.miss { background: var(--accent); }
 
-/* ---------- production rows ---------- */
+/* ---------- production rows: each one opens in place ---------- */
 .production { padding: 16vh var(--pad); }
 .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.job { border-bottom: 1px solid var(--line); }
 .row {
-  position: relative; isolation: isolate;
+  position: relative; isolation: isolate; cursor: pointer; list-style: none;
   display: grid; grid-template-columns: 56px minmax(0, 1.4fr) minmax(0, 1fr) 64px 24px; align-items: center; gap: 20px;
-  padding: clamp(18px, 2.6vh, 30px) 0; border-bottom: 1px solid var(--line);
-  text-decoration: none; transition: color .35s;
+  padding: clamp(18px, 2.6vh, 30px) 0; transition: color .35s;
 }
+.row::-webkit-details-marker { display: none; }
 .row::before {
   content: ""; position: absolute; inset: -1px calc(var(--pad) * -1); z-index: -1;
   background: var(--fg); transform: scaleY(0); transform-origin: bottom; transition: transform .55s var(--ease);
 }
 .row:hover, .row:focus-visible { color: var(--bg); }
 .row:hover::before, .row:focus-visible::before { transform: scaleY(1); }
+.row:focus-visible { outline: none; }
 .row__t { font-weight: 800; font-stretch: 70%; font-size: clamp(28px, 3.5vw, 60px); line-height: .95; letter-spacing: -.02em; text-transform: uppercase; transition: transform .55s var(--ease); }
 .row:hover .row__t { transform: translateX(18px); }
 .row__i, .row__s, .row__y { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); transition: color .35s; }
 .row:hover .row__i, .row:hover .row__s, .row:hover .row__y { color: inherit; }
-.row__a { font-size: 22px; transition: transform .5s var(--ease); }
-.row:hover .row__a { transform: translate(4px, -4px); }
+details[open] > .row .row__i { color: var(--accent); }
 .row__note { display: none; }
+/* a plus that folds into a minus */
+.row__a { position: relative; justify-self: end; width: 20px; height: 20px; }
+.row__a::before, .row__a::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: currentColor; transition: transform .5s var(--ease); }
+.row__a::after { transform: rotate(90deg); }
+details[open] > .row .row__a::after { transform: rotate(0deg); }
+
+.job__body {
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px clamp(24px, 4vw, 64px);
+  padding: 8px 0 44px 76px;
+  opacity: 0; translate: 0 14px; transition: opacity .5s var(--ease), translate .6s var(--ease);
+}
+details[open] .job__body { opacity: 1; translate: none; }
+.job__desc { max-width: 42ch; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.4; }
+.job__facts { display: grid; align-content: start; gap: 18px; margin: 0; }
+.job__facts dd { margin: 6px 0 0; font-size: 15px; line-height: 1.5; }
+.job__foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+.job__foot .chips { margin: 0; }
+/* height animates where the browser can (::details-content); elsewhere it opens instantly and still fades */
+:root { interpolate-size: allow-keywords; }
+.job details::details-content { block-size: 0; overflow: hidden; transition: block-size .6s var(--ease), content-visibility .6s allow-discrete; }
+.job details[open]::details-content { block-size: auto; }
 
 /* ---------- stack ---------- */
 .stack { padding: 6vh 0 16vh; }
@@ -637,10 +659,11 @@ em, .method__note i {
   .cards { grid-template-columns: minmax(0, 1fr); }
   .card { grid-template-columns: minmax(0, 1fr); position: relative; top: auto; min-height: 0; }
   .card__title { font-size: 12.5vw; }
-  .row { grid-template-columns: 36px minmax(0, 1fr) 24px; gap: 4px 14px; }
+  .row { grid-template-columns: 36px minmax(0, 1fr) 20px; gap: 4px 14px; }
   .row__s, .row__y { display: none; }
   .row__note { display: block; grid-column: 2; font: 500 11px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
   .row__note b { color: var(--accent); font-weight: 500; }
+  .job__body { grid-template-columns: minmax(0, 1fr); padding-left: 50px; }
   .commit { grid-template-columns: 1fr; }
   .wip li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   /* the pipeline runs down the left edge: each station draws its own segment to the next */

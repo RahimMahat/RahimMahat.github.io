@@ -241,36 +241,196 @@
     <h2 class="h2" id="production-h" data-split>Ten systems, <em>pager included.</em></h2>
   </div>
   <ol class="rows">
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/ingest" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">01</span><span class="row__t">The landing zone</span><span class="row__s">Glue · PySpark · Lambda · SQS</span><span class="row__y">2022</span><span class="row__a">↗</span>
-      <span class="row__note"><b>50%</b> lower end-to-end processing time</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/warehouse" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">02</span><span class="row__t">Warehouse &amp; serving</span><span class="row__s">Redshift · Denodo · QuickSight</span><span class="row__y">2023</span><span class="row__a">↗</span>
-      <span class="row__note"><b>35%</b> faster query execution after tuning</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/retail-pos" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">03</span><span class="row__t">Retail point-of-sale ETL</span><span class="row__s">Glue · PySpark · Redshift · pytest</span><span class="row__y">2023</span><span class="row__a">↗</span>
-      <span class="row__note"><b>29</b> processors across 14 retail partner feeds</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/sap" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">04</span><span class="row__t">SAP object onboarding</span><span class="row__s">AppFlow · Glue · Terraform · CDK</span><span class="row__y">2024</span><span class="row__a">↗</span>
-      <span class="row__note"><b>1h</b> extraction for delta feeds, down from daily</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/platform" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">05</span><span class="row__t">Infrastructure as code</span><span class="row__s">Terraform · CDK · Jenkins</span><span class="row__y">2024</span><span class="row__a">↗</span>
-      <span class="row__note"><b>40%</b> less manual effort per deployment</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/catalog" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">06</span><span class="row__t">The data catalog as code</span><span class="row__s">Terraform · Glue Catalog · Athena</span><span class="row__y">2024</span><span class="row__a">↗</span>
-      <span class="row__note"><b>154</b> tables, 5,000+ columns, reviewed before they exist</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/planning" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">07</span><span class="row__t">Supply-planning ingestion</span><span class="row__s">Glue · pandas · pandera</span><span class="row__y">2024</span><span class="row__a">↗</span>
-      <span class="row__note"><b>10</b> jobs where a bad file fails the run and names itself</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/events" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">08</span><span class="row__t">Analytics event API</span><span class="row__s">API Gateway · Lambda · SQS · CDK</span><span class="row__y">2024</span><span class="row__a">↗</span>
-      <span class="row__note"><b>3</b> phases in under four months, built alone</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/flowctl" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">09</span><span class="row__t">Flow operations utility</span><span class="row__s">Lambda · AppFlow · boto3 · pytest</span><span class="row__y">2025</span><span class="row__a">↗</span>
-      <span class="row__note"><b>400+</b> flows suspended in one invocation with a filter</span></a></li>
-    <li><a class="row" href="https://rahim-stdin.pages.dev/projects/snapshots" target="_blank" rel="noopener noreferrer">
-      <span class="row__i">10</span><span class="row__t">Daily snapshots</span><span class="row__s">Athena · Jinja · Step Functions</span><span class="row__y">2025</span><span class="row__a">↗</span>
-      <span class="row__note"><b>9</b> tables, one current row per key, daily</span></a></li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">01</span><span class="row__t">The landing zone</span><span class="row__s">Glue · PySpark · Lambda · SQS</span><span class="row__y">2022</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>50%</b> lower end-to-end processing time</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">The ingestion layer of a multi-source AWS platform: Glue and PySpark for batch, and one contract every source meets before anything downstream reads it.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>Several upstream systems on one contract — batch through Glue, and the platform’s first event path behind the same landing zone.</dd></div>
+            <div><dt class="label">outcome</dt><dd>50% lower end-to-end processing time than the pipeline it replaced.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>AWS Glue</li><li>PySpark</li><li>Lambda</li><li>SQS</li><li>API Gateway</li><li>S3</li><li>Jenkins</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/ingest" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">02</span><span class="row__t">Warehouse &amp; serving</span><span class="row__s">Redshift · Denodo · QuickSight</span><span class="row__y">2023</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>35%</b> faster query execution after tuning</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">The serving layer — Redshift models, a Denodo virtualization tier, and the QuickSight dashboards the business actually opens on a Monday morning.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>One modelled Redshift layer behind a virtualization tier, serving every BI consumer.</dd></div>
+            <div><dt class="label">outcome</dt><dd>35% faster query execution after performance tuning.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>Redshift</li><li>S3</li><li>Denodo</li><li>QuickSight</li><li>SQL</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/warehouse" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">03</span><span class="row__t">Retail point-of-sale ETL</span><span class="row__s">Glue · PySpark · Redshift · pytest</span><span class="row__y">2023</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>29</b> processors across 14 retail partner feeds</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">Twenty-nine Glue processors that turn fourteen retail partners’ sales and inventory files into one Redshift star schema, a feed at a time.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>29 processors (13 dimension, 16 fact) across 14 retail partner feeds, each with its own unit tests.</dd></div>
+            <div><dt class="label">outcome</dt><dd>A new retailer is a processor, a config entry and a test file — not a new pipeline.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>AWS Glue</li><li>PySpark</li><li>Redshift</li><li>S3</li><li>Python</li><li>SQL</li><li>pytest</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/retail-pos" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">04</span><span class="row__t">SAP object onboarding</span><span class="row__s">AppFlow · Glue · Terraform · CDK</span><span class="row__y">2024</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>1h</b> extraction for delta feeds, down from daily</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">Ninety SAP services taken from “it exists in SAP” to “it is a partitioned table in Athena”, through a fleet of 400+ AppFlow flows and a parameterised Glue job.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>90 SAP objects and 140+ source-to-lake mappings, in a fleet of 400+ flows on schedules from every twenty minutes to weekly.</dd></div>
+            <div><dt class="label">outcome</dt><dd>Delta-enabled feeds moved from one extraction a day to one an hour, with hour-level partitions to match.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>AppFlow</li><li>AWS Glue</li><li>Python</li><li>pandas</li><li>Parquet</li><li>Terraform</li><li>AWS CDK</li><li>Athena</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/sap" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">05</span><span class="row__t">Infrastructure as code</span><span class="row__s">Terraform · CDK · Jenkins</span><span class="row__y">2024</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>40%</b> less manual effort per deployment</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">Terraform and AWS CDK modules that moved environment setup out of the console and into reviewed pull requests.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>Every environment defined in code — no console-assembled infrastructure left.</dd></div>
+            <div><dt class="label">outcome</dt><dd>40% less manual effort per deployment.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>Terraform</li><li>AWS CDK</li><li>Jenkins</li><li>GitHub Actions</li><li>Python</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/platform" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">06</span><span class="row__t">The data catalog as code</span><span class="row__s">Terraform · Glue Catalog · Athena</span><span class="row__y">2024</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>154</b> tables, 5,000+ columns, reviewed before they exist</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">More than 150 partitioned Glue catalog tables and 5,000 columns declared in Terraform — a third of the platform’s catalog.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>154 tables and 5,000+ columns across 12 SAP functional areas; 166 Terraform modules in all, the most of any contributor.</dd></div>
+            <div><dt class="label">outcome</dt><dd>A table is reviewable in a pull request before it exists, and identical in every environment after.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>Terraform</li><li>Glue Data Catalog</li><li>Athena</li><li>S3</li><li>Parquet</li><li>HCL</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/catalog" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">07</span><span class="row__t">Supply-planning ingestion</span><span class="row__s">Glue · pandas · pandera</span><span class="row__y">2024</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>10</b> jobs where a bad file fails the run and names itself</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">Ten scheduled Glue jobs that check planning-system extracts against a declared schema and land them as partitioned tables.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>10 Glue jobs with catalog tables, on daily, weekday and weekly schedules, in a family of 32.</dd></div>
+            <div><dt class="label">outcome</dt><dd>A file that cannot be processed fails the run and names itself.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>AWS Glue</li><li>Python</li><li>pandas</li><li>pandera</li><li>Terraform</li><li>Parquet</li><li>Athena</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/planning" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">08</span><span class="row__t">Analytics event API</span><span class="row__s">API Gateway · Lambda · SQS · CDK</span><span class="row__y">2024</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>3</b> phases in under four months, built alone</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">A REST endpoint, a queue, two Lambdas and a Glue job that take usage events from client applications to a partitioned table, built alone in three phases.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>One API, two queues, two Lambda functions and a daily Glue job, consuming batches of up to 1,000 messages per invocation.</dd></div>
+            <div><dt class="label">outcome</dt><dd>Three phases shipped in under four months, from first endpoint to queryable table.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>API Gateway</li><li>Lambda</li><li>SQS</li><li>AWS CDK</li><li>AWS Glue</li><li>OpenAPI</li><li>Terraform</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/events" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">09</span><span class="row__t">Flow operations utility</span><span class="row__s">Lambda · AppFlow · boto3 · pytest</span><span class="row__y">2025</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>400+</b> flows suspended in one invocation with a filter</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">A Lambda that suspends, reactivates, reschedules and reports on a fleet of more than 400 AppFlow flows, so nobody does it one flow at a time in the console.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>Four modes over a fleet of 400+ flows, selected by criteria, covered by 33 unit tests.</dd></div>
+            <div><dt class="label">outcome</dt><dd>A bulk suspend or reactivate is one invocation with a filter.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>Lambda</li><li>AppFlow</li><li>Python</li><li>boto3</li><li>SNS</li><li>AWS CDK</li><li>pytest</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/flowctl" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
+    <li class="job">
+      <details>
+        <summary class="row">
+          <span class="row__i">10</span><span class="row__t">Daily snapshots</span><span class="row__s">Athena · Jinja · Step Functions</span><span class="row__y">2025</span><span class="row__a" aria-hidden="true"></span>
+          <span class="row__note"><b>9</b> tables, one current row per key, daily</span>
+        </summary>
+        <div class="job__body">
+          <p class="job__desc">Nine Athena queries that turn change-record tables into one current row per key, once a day, as partitioned Parquet.</p>
+          <dl class="job__facts">
+            <div><dt class="label">scale</dt><dd>9 snapshot tables, deployed to two environments, on the platform’s existing query runner.</dd></div>
+            <div><dt class="label">outcome</dt><dd>A consumer reads one day’s de-duplicated partition in place of the full change history.</dd></div>
+          </dl>
+          <div class="job__foot">
+            <ul class="chips"><li>Athena</li><li>SQL</li><li>Jinja</li><li>Step Functions</li><li>Lambda</li><li>Parquet</li><li>Terraform</li></ul>
+            <a class="btn btn--ghost" href="https://rahim-stdin.pages.dev/projects/snapshots" target="_blank" rel="noopener noreferrer">Full write-up ↗</a>
+          </div>
+        </div>
+      </details>
+    </li>
   </ol>
 </section>
 
