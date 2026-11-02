@@ -245,6 +245,7 @@ em, .method__note i {
 
 /* ---------- work (stacked cards) ---------- */
 .work { padding: 0 var(--pad) 16vh; }
+.work__intro { max-width: 52ch; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.5; color: var(--muted); }
 .legend { display: flex; align-items: center; gap: 10px; }
 .legend i { width: 12px; height: 12px; background: var(--accent); }
 .cards { display: grid; gap: 6vh; }
